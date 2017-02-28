@@ -8,7 +8,7 @@
 #
 
 # Set computer name
-COMPUTERNAME="Nick Plekhanov's MBP"
+COMPUTERNAME="Amit Zur's MBP"
 HOSTNAME='mbp'
 LOCALHOSTNAME='mbp'
 
@@ -23,10 +23,10 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 ###############################################################################
 
 # Set computer name (as done via System Preferences → Sharing)
-#sudo scutil --set ComputerName $COMPUTERNAME
-#sudo scutil --set HostName $HOSTNAME
-#sudo scutil --set LocalHostName $LOCALHOSTNAME
-#sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $LOCALHOSTNAME
+sudo scutil --set ComputerName $COMPUTERNAME
+sudo scutil --set HostName $HOSTNAME
+sudo scutil --set LocalHostName $LOCALHOSTNAME
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $LOCALHOSTNAME
 
 ###############################################################################
 # Apple software: Safari, Updater, iTunes, etc.                               #
@@ -53,7 +53,8 @@ defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
 defaults write com.apple.Safari HomePage -string "about:blank"
 
 # Use AirDrop over every interface.
-defaults write com.apple.NetworkBrowser BrowseAllInterfaces 1
+# AMIT: I don't want this since I'm not a user of any other apple device
+# defaults write com.apple.NetworkBrowser BrowseAllInterfaces 1
 
 # Check for software updates daily, not just once per week.
 defaults write com.assple.SoftwareUpdate ScheduleFrequency -int 1
@@ -105,16 +106,18 @@ defaults -currentHost write -g com.apple.trackpad.trackpadCornerClickBehavior -i
 defaults -currentHost write com.apple.trackpad.enableSecondaryClick -bool true
 
 # Set a really fast keyboard repeat rate.
+# AMIT: I think this isn't working in Sierra
 defaults write -g KeyRepeat -int 0
 
 # Disable press-and-hold for keys in favor of key repeat.
 defaults write -g ApplePressAndHoldEnabled -bool false
 
 # Set language and text formats. (USD and Imperial Units)
-defaults write -g AppleLanguages -array "en" "nl"
-defaults write -g AppleLocale -string "en_US@currency=USD"
-defaults write -g AppleMeasurementUnits -string "Inches"
-defaults write -g AppleMetricUnits -bool false
+# AMIT: I live in Israel, thank you very much
+#defaults write -g AppleLanguages -array "en" "nl"
+#defaults write -g AppleLocale -string "en_US@currency=USD"
+#defaults write -g AppleMeasurementUnits -string "Inches"
+#defaults write -g AppleMetricUnits -bool false
 
 ###############################################################################
 # Screen
@@ -136,8 +139,9 @@ defaults write -g AppleMetricUnits -bool false
 # defaults write com.apple.dock wvous-bl-modifier -int 0
 
 # Require password immediately after sleep or screen saver.
-defaults write com.apple.screensaver askForPassword -int 1
-defaults write com.apple.screensaver askForPasswordDelay -int 0
+# AMIT: using the touch ID. Anyhow, no need for this pref
+#defaults write com.apple.screensaver askForPassword -int 1
+#defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 # Save screenshots to desktop and disable the horrific drop-shadow.
 defaults write com.apple.screencapture location -string "${HOME}/Desktop/Screenshots"
@@ -223,7 +227,7 @@ defaults write com.apple.dock persistent-apps -array-add '{tile-data={}; tile-ty
 defaults write com.apple.dock persistent-apps -array-add '{tile-data={}; tile-type="spacer-tile";}'
 
 # Automatically hide and show the Dock
-# defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock autohide -bool true
 
 ###############################################################################
 # Do some clean up work.
